@@ -16,14 +16,24 @@ export function createMario() {
         const runAnim = createAnim(['run-1','run-2','run-3'], 10)
 
         function routeFrame(mario) {
-            if(mario.go.distance > 0) {
+            /*** sets default frame */
+            var frame = 'idle'
+            /*** checks if shows jump sprite animation */
+            if(!mario.jump.ready) {
+                frame = 'jump'
+            }
+            /*** checks if its moving */
+            else if(mario.go.distance > 0) {
                 /***checks if should show break sprite  */
                 if( (mario.vel.x > 0 && mario.go.dir < 0) || (mario.vel.x < 0 && mario.go.dir > 0) ) {
-                    return 'break'
+                    frame = 'break'
                 }
-                return runAnim(mario.go.distance)
+                else {
+                    /*** gets current run frame to display */
+                    frame = runAnim(mario.go.distance)
+                }
             }
-            return 'idle'
+            return frame
         }
         mario.draw = function drawMario(context) {
             sprite.draw(routeFrame(this), context, 0, 0, this.go.heading < 0)

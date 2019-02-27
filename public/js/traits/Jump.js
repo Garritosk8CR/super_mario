@@ -21,6 +21,10 @@ export default class Jump extends Trait {
         if(side === 'bottom') {
             this.ready = true
         }
+        else if( side === 'top') {
+            /*** stops jumping if its hitting an object above the character. */
+            this.cancel()
+        }
     }
 
     cancel() {
