@@ -4,7 +4,7 @@ export default class Jump extends Trait {
     constructor() {
         super('jump')
 
-        this.ready = false
+        this.ready = 0
         this.duration = 0.5
         this.engageTime = 0
 
@@ -12,14 +12,14 @@ export default class Jump extends Trait {
     }
 
     start() {
-        if(this.ready) {
+        if(this.ready > 0) {
             this.engageTime = this.duration
         } 
     }
 
     obstruct(entity, side) {
         if(side === 'bottom') {
-            this.ready = true
+            this.ready = 1
         }
         else if( side === 'top') {
             /*** stops jumping if its hitting an object above the character. */
@@ -36,6 +36,6 @@ export default class Jump extends Trait {
             entity.vel.y = -this.velocity
             this.engageTime -= deltaTime
         }
-        this.ready = false
+        this.ready--;
     }
 }
