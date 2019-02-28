@@ -1,5 +1,5 @@
-import TileResolver from './TileResolver.js';
-import {Sides} from './Entity'
+import TileResolver from './TileResolver.js'
+import {Sides} from './Entity.js'
 
 export default class TileCollider {
     constructor(tileMatrix) {
