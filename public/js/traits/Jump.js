@@ -7,8 +7,9 @@ export default class Jump extends Trait {
         this.ready = 0
         this.duration = 0.5
         this.engageTime = 0
-
         this.velocity = 200
+        this.requestTime = 0
+        this.gracePeriod = 0.150
     }
 
     get falling() {
@@ -16,9 +17,7 @@ export default class Jump extends Trait {
     }
 
     start() {
-        if(this.ready > 0) {
-            this.engageTime = this.duration
-        } 
+        this.requestTime = this.gracePeriod 
     }
 
     obstruct(entity, side) {
@@ -33,9 +32,17 @@ export default class Jump extends Trait {
 
     cancel() {
         this.engageTime = 0
+        this.requestTime = 0
     }
 
     update(entity, deltaTime) {
+        if(this.requestTime > 0) {
+            if(this.ready > 0) {
+                this.engageTime = this.duration
+                this.requestTime = 0
+            }
+            this.requestTime -= this.deltaTime
+        }
         if (this.engageTime > 0) {
             entity.vel.y = -this.velocity
             this.engageTime -= deltaTime
