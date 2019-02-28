@@ -19,7 +19,7 @@ export function createMario() {
             /*** sets default frame */
             var frame = 'idle'
             /*** checks if shows jump sprite animation */
-            if(mario.jump.ready < 0) {
+            if(mario.jump.falling) {
                 frame = 'jump'
             }
             /*** checks if its moving */

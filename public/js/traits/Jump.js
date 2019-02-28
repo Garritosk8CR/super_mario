@@ -11,6 +11,10 @@ export default class Jump extends Trait {
         this.velocity = 200
     }
 
+    get falling() {
+        return this.ready < 0
+    }
+
     start() {
         if(this.ready > 0) {
             this.engageTime = this.duration
