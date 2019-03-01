@@ -15,8 +15,13 @@ export default class Go extends Trait {
         const absoluteX = Math.abs(entity.vel.x)
         if (this.dir !== 0) {
             entity.vel.x += this.acceleration * deltaTime * this.dir
-            this.heading = this.dir
-            
+            if(entity.jump) {
+                if(entity.jump.falling === false) {
+                    this.heading = this.dir
+                }
+            } else {
+                this.heading = this.dir
+            }   
         } else if(entity.vel.x !== 0) {
             //*** calculate deceleration */
             const calculatedDeceleration = Math.min(absoluteX, this.deceleration * deltaTime)
