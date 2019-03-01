@@ -12,8 +12,9 @@ export function createMario() {
 
         mario.addTrait(new Go())
         mario.addTrait(new Jump())
-
-        const runAnim = createAnim(['run-1','run-2','run-3'], 10)
+        /*** lower number means faster frame rate */
+        var frameRate = 6
+        const runAnim = createAnim(['run-1','run-2','run-3'], frameRate)
 
         function routeFrame(mario) {
             /*** sets default frame */
