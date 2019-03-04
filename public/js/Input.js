@@ -11,7 +11,7 @@ export function setupKeyboard(entity) {
     })
 
     input.addMapping('KeyO', keyState => {
-        entity.go.dragFactor = keyState ? 1/5000 : 1/1000
+        entity.turbo(keyState)
     })
 
     input.addMapping('KeyD', keyState => {

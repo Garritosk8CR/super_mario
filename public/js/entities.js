@@ -4,14 +4,19 @@ import Jump from './traits/Jump.js'
 import {loadSpriteSheet} from './loaders.js'
 import createAnim from './anim.js'
 
+const FAST_DRAG = 1/5000
+const SLOW_DRAG = 1/1000
 export function createMario() {
     return loadSpriteSheet('mario')
     .then(sprite => {
         const mario = new Entity()
         mario.size.set(14, 16)
-
         mario.addTrait(new Go())
         mario.addTrait(new Jump())
+        mario.turbo = function setTurboState(turboOn) {
+            this.go.dragFactor = turboOn ? FAST_DRAG : SLOW_DRAG
+        }
+
         /*** lower number means faster frame rate */
         var frameRate = 6
         const runAnim = createAnim(['run-1','run-2','run-3'], frameRate)
